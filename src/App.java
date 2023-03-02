@@ -14,9 +14,13 @@ public class App {
         graph.addNode("D");
         graph.addNode("E");
         graph.addEdge("A", "B", 3);
-        graph.addEdge("B", "C", 5);
+        graph.addEdge("A", "C", 1);
+        graph.addEdge("B", "C", 2);
+        graph.addEdge("B", "D", 4);
+        graph.addEdge("C", "E", 6);
+        graph.addEdge("D", "C", 5);
 
-        System.out.println(graph.getShortestDistance("A", "E"));
+        graph.getMinimumSpanningTree().print();
     }
 
     public static Character getFirstNonRepeatedCharacter(String str) {

@@ -19,8 +19,8 @@ public class WeightedGraph {
             edges.add(new Edge(this, to, weight));
         }
 
-        private Edge[] getEdges() {
-            return edges.toArray(new Edge[0]);
+        private ArrayList<Edge> getEdges() {
+            return this.edges;
         }
 
         @Override
@@ -68,7 +68,7 @@ public class WeightedGraph {
     public void print() {
         for (var node : nodes.values()) {
             var neighbors = node.getEdges();
-            if (neighbors.length != 0)
+            if (!neighbors.isEmpty())
                 System.out.println(node + " is connected with " + neighbors);
         }
     }
@@ -125,23 +125,58 @@ public class WeightedGraph {
         Set<Node> visited = new HashSet<>();
 
         for (var node : nodes.values()) {
-            if (hasCycle(node, null, visited)) return true;
+            if (!visited.contains(node) && hasCycle(node, null, visited)) return true;
         }
 
         return false;
     }
 
     private boolean hasCycle(Node node, Node parent, Set<Node> visited) {
-        if (parent != node && visited.contains(node))
-            return true;
-
         visited.add(node);
 
         for (Edge edge : node.getEdges()) {
             if (edge.to == parent) continue;
-            if (hasCycle(edge.to, node, visited)) return true;
+            if (visited.contains(edge.to) || hasCycle(edge.to, node, visited)) return true;
         }
 
         return false;
+    }
+
+    public WeightedGraph getMinimumSpanningTree() {
+        var tree = new WeightedGraph();
+
+        if (nodes.isEmpty())
+            return tree;
+
+        PriorityQueue<Edge> queue = new PriorityQueue<>(Comparator.comparingInt(ee -> ee.weight));
+
+        var startNode = nodes.values().iterator().next();
+        queue.addAll(startNode.getEdges());
+        tree.addNode(startNode.label);
+
+        if (queue.isEmpty())
+            return tree;
+
+        while (tree.nodes.size() < nodes.size()) {
+            var minEdge = queue.remove();
+            var nextNode = minEdge.to;
+
+            if (tree.hasLabel(nextNode.label))
+                continue;
+
+            tree.addNode(nextNode.label);
+            tree.addEdge(minEdge.from.label, nextNode.label, minEdge.weight);
+
+            for (Edge edge : nextNode.getEdges()) {
+                if (!tree.hasLabel(edge.to.label))
+                    queue.add(edge);
+            }
+        }
+
+        return tree;
+    }
+
+    public boolean hasLabel(String label) {
+        return nodes.containsKey(label);
     }
 }
