@@ -6,6 +6,33 @@ import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
+        
+    }
+
+    public static void searches(String[] args) {
+        int[] numbers = { 0, 1, 2, 3, 4, 5, 7, 8, 9 };
+
+        System.out.println(Searching.linearSearch(numbers, 3));
+        System.out.println(Searching.binarySearch(numbers, 3));
+        System.out.println(Searching.binarySearchIterative(numbers, 3));
+        System.out.println(Searching.ternarySearch(numbers, 3));
+        System.out.println(Searching.jumpSearch(numbers, 3));
+        System.out.println(Searching.exponentialSearch(numbers, 9));
+    }
+
+    public static void sorts(String[] args) {
+        int[] numbers = { 7, 1, 3, 4, 2, 6, 3 };
+
+        System.out.println(Arrays.toString(Sorting.bubbleSort(numbers)));
+        System.out.println(Arrays.toString(Sorting.selectionSort(numbers)));
+        System.out.println(Arrays.toString(Sorting.insertionSort(numbers)));
+        System.out.println(Arrays.toString(Sorting.mergeSort(numbers)));
+        System.out.println(Arrays.toString(Sorting.quickSort(numbers)));
+        System.out.println(Arrays.toString(Sorting.countSort(numbers)));
+        System.out.println(Arrays.toString(Sorting.bucketSort(numbers, 3)));
+    }
+
+    public static void getMinimumSpanningTree() {
         var graph = new WeightedGraph();
 
         graph.addNode("A");
