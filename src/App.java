@@ -6,7 +6,15 @@ import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
-        
+        System.out.println(StringUtil.countVowels("hello"));
+        System.out.println(StringUtil.reverse("hello"));
+        System.out.println("'" + StringUtil.reverseSentence("Trees are beautiful") + "'");
+        System.out.println(StringUtil.isRotation("ABCD", "CDAB"));
+        System.out.println(StringUtil.removeDuplicates(""));
+        System.out.println(StringUtil.mostRepeatedCharachter("nul"));
+        System.out.println("'" + StringUtil.capitalizeWords("TREES ARE BEAUTIFUL") + "'");
+        System.out.println(StringUtil.areAnagram("abccd", "adb"));
+        System.out.println(StringUtil.isPalindrome("abca"));
     }
 
     public static void searches(String[] args) {
